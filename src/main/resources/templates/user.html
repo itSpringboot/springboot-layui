@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>用户列表</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>职务</th>
+            <th>签字</th>
+        </tr>
+        <tr th:each="prod : ${users.list}">
+            <td th:text="${prod.insideName}"></td>
+            <td th:text="${prod.insidePost}"></td>
+            <td th:text="${prod.superRecord}"></td>
+        </tr>
+    </table>
+    <div class="clearfix">
+        <tr class="pagination m-b-5 pull-right">
+            <td th:if="${users.hasPreviousPage}"><a
+                    th:href="@{'/getAlluser?page='+${users.prePage}}"
+                    aria-label="Previous"> <i class="fa fa-angle-left"></i>&nbsp;上一页
+            </a></td>
+
+            <th:block th:each="nav : ${users.navigatepageNums}">
+                <td th:class="${nav==users.pageNum}?'active':''"><a
+                        th:href="@{'/getAlluser?page='+${nav}}"
+                        th:text="${nav}"></a></td>
+            </th:block>
+
+            <th:block th:if="${users.hasNextPage}">
+                <td><a
+                        th:href="@{'/getAlluser?page='+${users.nextPage}}"
+                        aria-label="Next"> 下一页&nbsp;<i class="fa fa-angle-right"></i>
+                </a></td>
+            </th:block>
+
+            <td><span th:text="'共'+${users.pages}+'页'"></span></td>
+        </tr>
+    </div>
+</div>
+</table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+开发背景
+    maven ：3.3.3
+    JDK ： 1.8
+    Intellij IDEA : 2017.2.5 开发工具
+    spring boot ：1.5.9.RELEASE
+    mybatis 3.4.5 ：dao层框架
+    pageHelper : 5.1.2
+    httpClient : 4.5.3
+    layui 2.2.3 :前端框架
+    shiro 1.4.0 ：权限控制框架 （token权限校验  rabbitmq redis）
+    druid 1.1.5 ：druid连接池，监控数据库性能，记录SQL执行日志
+    thymeleaf ：2.1.4.RELEASE，thymeleaf前端html页面模版
+    log4j2 2.7 ：日志框架
+    EHCache : 2.5.0
+    ztree : 3.5.31

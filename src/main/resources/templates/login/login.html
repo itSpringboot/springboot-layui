@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:;base64,=">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="static/layui/examples/login/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="static/layui/examples/login/css/demo.css" />
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="static/layui/examples/login/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="static/layui/src/css/layui.css" />
+    <script type="text/javascript" src="static/layui/examples/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/layui/src/layui.js"></script>
+</head>
+<body>
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <div class="logo_box">
+                <h3>欢迎你</h3>
+                <form class="layui-form" action="/userlogin" name="f" method="post">
+                    <div class="input_outer">
+                        <span class="u_user"></span>
+                        <input name="username" class="text" lay-verify="username" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                    </div>
+                    <div class="input_outer">
+                        <span class="us_uer"></span>
+                        <input name="password" class="text" lay-verify="password" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="请输入密码">
+                    </div>
+                    <div class="mb2"><a id = "sub" lay-submit lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- /container -->
+<script src="static/layui/examples/login/js/TweenLite.min.js"></script>
+<script src="static/layui/examples/login/js/EasePack.min.js"></script>
+<script src="static/layui/examples/login/js/rAF.js"></script>
+<script src="static/layui/examples/login/js/demo-1.js"></script>
+<script src="static/layui/examples/login/js/md5.js"></script>
+</body>
+<script>
+    //加载弹出层组件
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //自定义验证规则
+        form.verify({
+            username: function(value){
+                if(value.length < 5){
+                    return '账号至少得5个字符';
+                }
+            }
+            ,password: [/(.+){6,12}$/, '密码必须6到12位']
+        });
+
+        /*//登录的点击事件
+        $("#sub").on("click",function(){
+            login();
+        })*/
+
+        $("body").keydown(function(){
+            if(event.keyCode == "13"){
+                login();
+            }
+        })
+        //加盐
+        var salt = "1#2$3%4(5)6@7!poeeww$3%4(5)djjkkldss";
+        //监听提交
+        form.on('submit(sub)', function(data){
+            $(" input[ name='password' ] ").val(hex_md5($(" input[ name='password' ] ").val() + "{" + salt + "}"));
+            document.f.submit();
+        });
+        //登录函数
+        function login(){
+            var username = $(" input[ name='username' ] ").val();
+            var password = $(" input[ name='password' ] ").val();
+            console.log(password);
+            location.href = "/login";
+
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.rssinsidesuper.dao.RssInsideSuperMapper" >
+  <resultMap id="BaseResultMap" type="com.example.rssinsidesuper.data.RssInsideSuper" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="present_id" property="presentId" jdbcType="VARCHAR" />
+    <result column="inside_name" property="insideName" jdbcType="VARCHAR" />
+    <result column="inside_post" property="insidePost" jdbcType="VARCHAR" />
+    <result column="super_record" property="superRecord" jdbcType="VARCHAR" />
+    <result column="crt_user" property="crtUser" jdbcType="VARCHAR" />
+    <result column="crt_time" property="crtTime" jdbcType="VARCHAR" />
+    <result column="upd_user" property="updUser" jdbcType="VARCHAR" />
+    <result column="upd_time" property="updTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, present_id, inside_name, inside_post, super_record, crt_user, crt_time, upd_user, 
+    upd_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from rss_inside_super
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getAlluser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rss_inside_super
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rss_inside_super
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.rssinsidesuper.data.RssInsideSuper" >
+    insert into rss_inside_super (id, present_id, inside_name, 
+      inside_post, super_record, crt_user, 
+      crt_time, upd_user, upd_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{presentId,jdbcType=VARCHAR}, #{insideName,jdbcType=VARCHAR}, 
+      #{insidePost,jdbcType=VARCHAR}, #{superRecord,jdbcType=VARCHAR}, #{crtUser,jdbcType=VARCHAR}, 
+      #{crtTime,jdbcType=VARCHAR}, #{updUser,jdbcType=VARCHAR}, #{updTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.rssinsidesuper.data.RssInsideSuper" >
+    insert into rss_inside_super
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="presentId != null" >
+        present_id,
+      </if>
+      <if test="insideName != null" >
+        inside_name,
+      </if>
+      <if test="insidePost != null" >
+        inside_post,
+      </if>
+      <if test="superRecord != null" >
+        super_record,
+      </if>
+      <if test="crtUser != null" >
+        crt_user,
+      </if>
+      <if test="crtTime != null" >
+        crt_time,
+      </if>
+      <if test="updUser != null" >
+        upd_user,
+      </if>
+      <if test="updTime != null" >
+        upd_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="presentId != null" >
+        #{presentId,jdbcType=VARCHAR},
+      </if>
+      <if test="insideName != null" >
+        #{insideName,jdbcType=VARCHAR},
+      </if>
+      <if test="insidePost != null" >
+        #{insidePost,jdbcType=VARCHAR},
+      </if>
+      <if test="superRecord != null" >
+        #{superRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUser != null" >
+        #{crtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTime != null" >
+        #{crtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updUser != null" >
+        #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.rssinsidesuper.data.RssInsideSuper" >
+    update rss_inside_super
+    <set >
+      <if test="presentId != null" >
+        present_id = #{presentId,jdbcType=VARCHAR},
+      </if>
+      <if test="insideName != null" >
+        inside_name = #{insideName,jdbcType=VARCHAR},
+      </if>
+      <if test="insidePost != null" >
+        inside_post = #{insidePost,jdbcType=VARCHAR},
+      </if>
+      <if test="superRecord != null" >
+        super_record = #{superRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUser != null" >
+        crt_user = #{crtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTime != null" >
+        crt_time = #{crtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updUser != null" >
+        upd_user = #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updTime != null" >
+        upd_time = #{updTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.rssinsidesuper.data.RssInsideSuper" >
+    update rss_inside_super
+    set present_id = #{presentId,jdbcType=VARCHAR},
+      inside_name = #{insideName,jdbcType=VARCHAR},
+      inside_post = #{insidePost,jdbcType=VARCHAR},
+      super_record = #{superRecord,jdbcType=VARCHAR},
+      crt_user = #{crtUser,jdbcType=VARCHAR},
+      crt_time = #{crtTime,jdbcType=VARCHAR},
+      upd_user = #{updUser,jdbcType=VARCHAR},
+      upd_time = #{updTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
