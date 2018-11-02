@@ -4,6 +4,7 @@ import com.example.common.constant.SystemConstant;
 import com.example.common.entity.CheckResult;
 import com.example.common.redis.service.RedisService;
 import com.example.common.util.JwtUtils;
+import com.example.common.webutil.CookieUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -41,14 +43,11 @@ public class SysInterceptor implements HandlerInterceptor {
             return false;
         }
     	if (handler instanceof HandlerMethod){
-           String result = redisService.get("username");
+            Cookie cookie = CookieUtil.getCookie(request,"inspur_token");
+            String uid = redisService.get(cookie.getValue());
 
-            logger.info(result);
-            if(result==null||"".equals(result)){
-                response.sendRedirect("/");
-                return false;
-            }
-    		String authHeader = redisService.get(result);
+            String authHeader = redisService.get("inspur_token"+uid);
+
         	if (StringUtils.isEmpty(authHeader)) {
         	  logger.info("验证失败");
         	  /*print(response,R.error(SystemConstant.JWT_ERRCODE_NULL,"签名验证不存在"));*/

@@ -1,8 +1,7 @@
 package com.example.rssinsidesuper.controller;
 
-import com.example.common.constant.SystemConstant;
 import com.example.common.redis.service.RedisService;
-import com.example.common.util.JwtUtils;
+import com.example.common.webutil.JurUtil;
 import com.example.rssinsidesuper.data.RssInsideSuper;
 import com.example.rssinsidesuper.service.RssInsideSuperService;
 import com.github.pagehelper.PageHelper;
@@ -21,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by wu.bing on 2018/10/10.
@@ -48,11 +48,11 @@ public class RssinsidesuperController {
 
         String username = request.getParameter("username");
         String password =  request.getParameter("password");
-        String JWT = JwtUtils.createJWT(password, username, SystemConstant.JWT_TTL);
+        String JWT = JurUtil.setUid(response, UUID.randomUUID().toString().replace("-", ""),username);
 
-        redisService.set("username",username);
-        redisService.set(username,JWT);
-        return "admin";
+        /*redisService.set("username",username);
+        redisService.set(username,JWT);*/
+        return "redirect:static/layui/examples/admin.html";
     }
     @RequestMapping("/getuser")
     @ResponseBody
@@ -108,7 +108,7 @@ public class RssinsidesuperController {
 
     @RequestMapping("/admin")
     public String admin(){
-        return "admin";
+        return "admin.html";
     }
     @ResponseBody
     @RequestMapping(value = "/query", produces = {"application/json;charset=UTF-8"})
@@ -117,5 +117,11 @@ public class RssinsidesuperController {
         return rssInside;
     }
 
+    // 注销
+    @RequestMapping("doExit")
+    public String doExit(HttpServletRequest request, HttpServletResponse response){
+        JurUtil.removeUid(request, response);
+        return "redirect:static/layui/examples/login.html";
+    }
 }
 

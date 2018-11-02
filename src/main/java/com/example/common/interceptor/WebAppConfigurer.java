@@ -28,7 +28,7 @@ public class WebAppConfigurer extends WebMvcConfigurationSupport {
 	}
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry){
-		registry.addViewController("/").setViewName("login/login");
+		registry.addViewController("/").setViewName("redirect:static/layui/examples/login.html");
 		registry.addViewController("/error/404").setViewName("error/404");
 		registry.addViewController("/error/500").setViewName("error/500");
 		super.addViewControllers(registry);
