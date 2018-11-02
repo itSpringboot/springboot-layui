@@ -44,6 +44,11 @@ public class SysInterceptor implements HandlerInterceptor {
         }
     	if (handler instanceof HandlerMethod){
             Cookie cookie = CookieUtil.getCookie(request,"inspur_token");
+            if(cookie==null){
+                logger.info("Cookie不存在");
+                response.sendRedirect("/");
+                return false;
+            }
             String uid = redisService.get(cookie.getValue());
 
             String authHeader = redisService.get("inspur_token"+uid);
