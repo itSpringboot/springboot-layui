@@ -4,9 +4,10 @@ server:
 logging:
   level:
     root: INFO
+# 配置静态文件引用目录
 wyait:
   picpath: D:/images/
-
+# spring相关配置
 spring:
     mvc:
       static-path-pattern: /**
@@ -23,7 +24,7 @@ spring:
         cache: false
     datasource:
         name: test
-        url: jdbc:mysql://10.110.1.117/rss?useSSL=false&serverTimezone=Hongkong&characterEncoding=utf-8
+        url: jdbc:mysql://10.110.1.117/rss?useSSL=false&serverTimezone=Hongkong&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL&allowMultiQueries=true&useUnicode=true
         username: root
         password: InspurYh@777
         # 使用druid数据源
@@ -35,8 +36,8 @@ spring:
         maxWait: 60000
         timeBetweenEvictionRunsMillis: 60000
         minEvictableIdleTimeMillis: 300000
-        validationQuery: SELECT 1
         testWhileIdle: true
+        validationQuery: SELECT 1
         testOnBorrow: false
         testOnReturn: false
         poolPreparedStatements: false

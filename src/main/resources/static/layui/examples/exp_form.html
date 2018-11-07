@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表单模块 - layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="../src/css/layui.css">
+
+    <style>
+        body{padding: 10px;}
+    </style>
+</head>
+<body>
+
+<form class="layui-form layui-form-pane1" action="/rss/upduser" lay-filter="first">
+    <input type="hidden" name="id">
+    <input type="hidden" name="presentId">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="insideName"  required placeholder="请输入姓名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职务</label>
+        <div class="layui-input-inline">
+            <input type="text" name="insidePost"  required placeholder="请输入职务" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">监督记录</label>
+        <div class="layui-input-block">
+            <textarea placeholder="监督记录" class="layui-textarea" name="superRecord"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<br><br><br>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="../src/layui.js"></script>
+<!-- <script src="../build/lay/dest/layui.all.js"></script> -->
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        var obj;
+        var exp_id = sessionStorage.getItem("exp_id");
+        $.ajax({
+            url:"/rss/getuser",
+            async:false,
+            data:{"id":exp_id},
+            success:function(data){
+                console.log(data);
+                form.val('first', data);
+            }
+        });
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题也太短了吧';
+                }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,money: [
+                /^\d+\.\b\d{2}\b$/
+                ,'金额必须为小数保留两位'
+            ]
+        });
+
+        //初始赋值
+        form.val('first', {});
+
+
+        //事件监听
+        form.on('select', function(data){
+            console.log('select: ', this, data);
+        });
+
+        form.on('select(quiz)', function(data){
+            console.log('select.quiz：', this, data);
+        });
+
+        form.on('select(interest)', function(data){
+            console.log('select.interest: ', this, data);
+        });
+
+
+
+        form.on('checkbox', function(data){
+            console.log(this.checked, data.elem.checked);
+        });
+
+        form.on('switch', function(data){
+            console.log(data);
+        });
+
+        form.on('radio', function(data){
+            console.log(data);
+        });
+
+        //监听提交
+        form.on('submit(*)', function(data){
+            console.log(data)
+            alert(JSON.stringify(data.field));
+            return false;
+        });
+
+    });
+
+</script>
+
+<script>
+    layui.use('jquery', function(){
+        var $ = layui.jquery;
+        var submit = function(){
+            return false;
+        };
+        $('#test').on('submit', function(){
+            return false
+        });
+        $('#test').on('submit', function(){
+            return true
+        });
+    });
+</script>
+</body>
+</html>

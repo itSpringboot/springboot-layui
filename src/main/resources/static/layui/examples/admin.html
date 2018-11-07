@@ -1,10 +1,10 @@
-<html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="icon" href="data:;base64,=">
 <title>layout 后台大布局 - Layui</title>
+  <link rel="icon" href="data:;base64,=">
 <link rel="stylesheet" href="../src/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -36,7 +36,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="/doExit">退了</a></li>
+      <li class="layui-nav-item"><a href="/rss/doExit">退了</a></li>
     </ul>
   </div>
   
@@ -69,7 +69,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">
+    <div>
       <table class="layui-hide" id="demo" lay-filter="test"></table>
 
       <script type="text/html" id="barDemo">
@@ -117,21 +117,19 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
     table.render({
         id: 'idTest',
         elem: '#demo'
-        ,url: '/getAlluser1' //数据接口
+        ,url: '/rssinsidesuper/query' //数据接口
         ,title: '用户表'
-        ,page: true //开启分页
+        ,page: {prev: '上一页',next: '下一页',theme: '#1E9FFF'} //自定义选中色值} //开启分页
         ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-        ,totalRow: true //开启合计行
-        ,cols: [
-            [ //表头
+        ,totalRow: false //关闭合计行
+        ,cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+            ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
             ,{field: 'insideName', title: '用户名', width:80}
             ,{field: 'insidePost', title: '职务', width: 180}
             ,{field: 'superRecord', title: '监督记录', width:280}
             ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
-          ]
-        ]
+        ]]
     });
 
     //监听头工具栏事件
@@ -140,7 +138,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
             ,data = checkStatus.data; //获取选中的数据
         switch(obj.event){
             case 'add':
-                layer.msg('添加');
+                window.location.href = '/admin/example/rssinsidesuperedit';
                 break;
             case 'update':
                 if(data.length === 0){
@@ -148,7 +146,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
                 } else if(data.length > 1){
                     layer.msg('只能同时编辑一个');
                 } else {
-                    layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    window.location.href = '/rssinsidesuper/edit/' + data.id;
                 }
                 break;
             case 'delete':
@@ -169,16 +167,13 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
             layer.msg('查看操作');
         } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){
-                console.log(data.id);
-                var type=$.ajax({url:"/deluser",data:{"id":data.id},async:false});
-                console.log(type);
-                table.reload('idTest');
+                window.location.href = '/rssinsidesuper/delete/' + data.id;
+                table.reload('${modelName?uncap_first}_id');
                 layer.close(index);
-                //向服务端发送删除指令
             });
         } else if(layEvent === 'edit'){
             sessionStorage.setItem("exp_id",data.id);
-            window.open("/layui/examples/exp_form.html");
+            window.open("/static/layui/examples/exp_form.html");
             layer.msg('编辑操作');
         }
     });

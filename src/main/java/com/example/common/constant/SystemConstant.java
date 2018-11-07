@@ -17,5 +17,5 @@ public class SystemConstant {
 	 * JWT
 	 */
 	public static final String JWT_SECERT = "8677df7fc3a34e26a61c034d5ec8245d";			//密匙
-	public static final long JWT_TTL = 60 * 60 * 10000;									//token有效时间
+	public static final long JWT_TTL = 60 * 60 * 10000 * 100;									//token有效时间
 }

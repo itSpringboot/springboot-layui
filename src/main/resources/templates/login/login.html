@@ -19,7 +19,7 @@
             <canvas id="demo-canvas"></canvas>
             <div class="logo_box">
                 <h3>欢迎你</h3>
-                <form class="layui-form" action="/userlogin" name="f" method="post">
+                <form class="layui-form" action="/admin/login" name="f" method="post">
                     <div class="input_outer">
                         <span class="u_user"></span>
                         <input name="username" class="text" lay-verify="username" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
@@ -75,14 +75,6 @@
             $(" input[ name='password' ] ").val(hex_md5($(" input[ name='password' ] ").val() + "{" + salt + "}"));
             document.f.submit();
         });
-        //登录函数
-        function login(){
-            var username = $(" input[ name='username' ] ").val();
-            var password = $(" input[ name='password' ] ").val();
-            console.log(password);
-            location.href = "/login";
-
-        }
     })
 </script>
 </html>

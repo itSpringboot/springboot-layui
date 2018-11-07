@@ -16,7 +16,7 @@ public class JurUtil {
 
 	
 	public static String tokenName = "inspur_token";		// cookie(token)的名字
-	public static int tokenTime = 7 * 24 * 60 * 60;		// cookie失效时间，单位s 此为7天
+	public static int tokenTime = 30 * 24 * 60 * 60;		// cookie失效时间，单位s 此为30天
 	public static boolean isGetToken = false;		// 是否在无cookie时尝试从get参数中获取token
 
 

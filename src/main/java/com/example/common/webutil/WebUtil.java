@@ -18,7 +18,7 @@ public class WebUtil {
 	// 工具方法
 
 	/**
-	 * 取出一个值，我保证不乱码,tomcat8及以上版本此方法废掉
+	 * 取出一个值,tomcat8及以上版本此方法废掉
 	 */
 	public static String getParam(HttpServletRequest request, String key) {
 		try {
@@ -33,7 +33,7 @@ public class WebUtil {
 		}
 	}
 	/**
-	 * 取出一个值，我保证不乱码,tomcat8及以上版本专用
+	 * 取出一个值,tomcat8及以上版本专用
 	 */
 	public static String getParam8(HttpServletRequest request, String key) {
 		try {

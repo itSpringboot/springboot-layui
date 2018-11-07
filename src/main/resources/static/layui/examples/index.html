@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>layui在线调试</title>
-    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css?t=1535898708509" media="all">
+    <link rel="stylesheet" href="../src/css/layui.css" media="all">
     <style>
         body{margin: 10px;}
         .demo-carousel{height: 200px; line-height: 200px; text-align: center;}
@@ -20,7 +19,7 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-
+<!--
 <div class="layui-tab layui-tab-brief" lay-filter="demo">
     <ul class="layui-tab-title">
         <li class="layui-this">演示说明</li>
@@ -58,15 +57,13 @@
             <div id="sliderDemo" style="margin: 50px 20px;"></div>
         </div>
     </div>
-</div>
-
-<blockquote class="layui-elem-quote layui-quote-nm layui-hide" id="footer">layui {{ layui.v }} 提供强力驱动</blockquote>
+</div>-->
 
 
-<script src="//res.layui.com/layui/dist/layui.js?t=1535898708509"></script>
+<script src="../src/layui.js"></script>
 <script>
     layui.config({
-        version: '1535898708509' //为了更新 js 缓存，可忽略
+        version: '1540399286917' //为了更新 js 缓存，可忽略
     });
 
     layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function(){
@@ -92,19 +89,19 @@
         //执行一个 table 实例
         table.render({
             elem: '#demo'
-            ,height: 420
-            ,url: '/getAlluser' //数据接口
+            ,height: 500
+            ,url: '/getAlluser1' //数据接口
             ,title: '用户表'
-            ,page: false //开启分页
+            ,page: true //开启分页
             ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             ,totalRow: true //开启合计行
             ,cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}
-                ,{field: 'presentId', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
-                ,{field: 'insideName', title: '用户', width:80}
-                ,{field: 'insidePost', title: '职务', width: 80, sort: true/*, totalRow: true*/}
-                ,{field: 'superRecord', title: '签字', width:80, sort: true}
-                ,{fixed: 'superRecord', width: 165, align:'center', toolbar: '#barDemo'}
+                ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'insideName', title: '用户名', width:80}
+                ,{field: 'insidePost', title: '职务', width: 180}
+                ,{field: 'superRecord', title: '监督记录', width:280}
+                ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
             ]]
         });
 
