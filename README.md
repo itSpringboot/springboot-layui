@@ -8,4 +8,4 @@
 增加跨域过滤器CorsFilter,完善拦截器SysInterceptor中基于redis+cookie+token的用户鉴权
 
 # 2018-11-7 17:47:01
-一个完整的增删改查流程，html页面都放在了template文件洗下，我们这次做的crud的demo页面都在template/jcy下，访问页面可以使用localhost:8089/admin/jcy/{page} #{page} 页面名称 不需要输入后缀(.html)
+一个完整的增删改查流程，html页面都放在了template文件夹下，rud的demo页面在template/jcy下，访问页面可以使用ip:port/admin/jcy/{page} #{page} 页面名称 不需要输入后缀(.html)
