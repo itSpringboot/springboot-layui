@@ -25,20 +25,23 @@ public class AllControllerA {
         String password =  request.getParameter("password");
         String JWT = JurUtil.setUid(response, UUID.randomUUID().toString().replace("-", ""),username);
 
-        return "redirect:/static/layui/examples/admin.html";
+        return "redirect:/admin/admin";
     }
 
     @RequestMapping({"/jcy/{page}"})
-    public String gotoPage(@PathVariable String page){
+    public String gojcyPage(@PathVariable String page){
        return  "/jcy/" + page;
     }
-
+    @RequestMapping({"/{page}"})
+    public String goPage(@PathVariable String page){
+        return  page;
+    }
 
     // 注销
     @RequestMapping("/doExit")
     public String doExit(HttpServletRequest request, HttpServletResponse response){
         JurUtil.removeUid(request, response);
-        return "redirect:/static/layui/examples/login.html";
+        return "redirect:/login";
     }
 
 }

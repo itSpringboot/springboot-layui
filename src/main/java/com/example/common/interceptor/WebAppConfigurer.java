@@ -16,7 +16,7 @@ public class WebAppConfigurer extends WebMvcConfigurationSupport {
 	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		String[] patterns = new String[] {"/error/*","/admin/login","/*.html"};
+		String[] patterns = new String[] {"/login","/error/*","/admin/login","/*.html"};
 		registry.addInterceptor(sysInterceptor()).addPathPatterns("/**").
 				excludePathPatterns(patterns);
 		super.addInterceptors(registry);
@@ -29,6 +29,7 @@ public class WebAppConfigurer extends WebMvcConfigurationSupport {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry){
 		registry.addViewController("/").setViewName("/login/login");
+		registry.addViewController("/login").setViewName("/login/login");
 		registry.addViewController("/error/404").setViewName("error/404");
 		registry.addViewController("/error/500").setViewName("error/500");
 		super.addViewControllers(registry);

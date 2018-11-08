@@ -46,7 +46,7 @@ public class SysInterceptor implements HandlerInterceptor {
             Cookie cookie = CookieUtil.getCookie(request,"inspur_token");
             if(cookie==null){
                 logger.info("Cookie不存在");
-                response.sendRedirect("/");
+                response.sendRedirect("/login");
                 return false;
             }
             String uid = redisService.get(cookie.getValue());
@@ -56,7 +56,7 @@ public class SysInterceptor implements HandlerInterceptor {
         	if (StringUtils.isEmpty(authHeader)) {
         	  logger.info("验证失败");
         	  /*print(response,R.error(SystemConstant.JWT_ERRCODE_NULL,"签名验证不存在"));*/
-                response.sendRedirect("/");
+                response.sendRedirect("/login");
               return false;
             }else{
             	//验证JWT的签名，返回CheckResult对象
@@ -68,12 +68,12 @@ public class SysInterceptor implements HandlerInterceptor {
                     // 签名验证不通过
                     case SystemConstant.JWT_ERRCODE_FAIL:
                     	logger.info("签名验证不通过");
-                        response.sendRedirect("/");
+                        response.sendRedirect("/login");
                     	break;
                      // 签名过期，返回过期提示码
                     case SystemConstant.JWT_ERRCODE_EXPIRE:
                     	logger.info("签名过期");
-                        response.sendRedirect("/");
+                        response.sendRedirect("/login");
                     	break;
                     default:
                         break;
