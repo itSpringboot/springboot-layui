@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>spring-boot-layui</artifactId>
+	<artifactId>springboot-layui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-layui</name>
+	<name>springboot-layui</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
