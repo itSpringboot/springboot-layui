@@ -1,6 +1,6 @@
 package com.inspur.service;
 
-import com.example.commonweb.service.AbstractService;
+import com.inspur.common.web.service.AbstractService;
 import com.inspur.data.RssInsideSuper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
