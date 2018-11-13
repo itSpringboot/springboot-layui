@@ -16,7 +16,6 @@ public interface BaseGetController<T extends Serializable, P extends Serializabl
      * @throws
      * @Title:
      * @Description: 根据id查询一条记录
-     * @date 2018/3/14 15:18
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     T get(@PathVariable("id") P id);
@@ -27,7 +26,6 @@ public interface BaseGetController<T extends Serializable, P extends Serializabl
      * @throws
      * @Title:
      * @Description: 根据条件查询一条记录
-     * @date 2018/3/14 15:18
      */
     @RequestMapping(value = "one", method = RequestMethod.GET)
     T getCond(@Validated @ModelAttribute T bean);

@@ -20,11 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author hyluan
- * @ClassName: BaseControllerImpl 注意阀盖方法时入参上的注解不能继承，需要重新设置
- * @Description: (这里用一句话描述这个类的作用)
- * @date 2018/3/14 15:18
- * @Copyright: Copyright (c) 2018 wisedu
+ * @ClassName: BaseControllerImpl 注意覆盖方法时入参上的注解不能继承，需要重新设置
  */
 public abstract class BaseControllerImpl<T extends Serializable, P extends Serializable>
         implements BaseController<T, P> {
@@ -60,11 +56,8 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
     /**
      * @param requestPage
      * @param bean
-     * @return cn.backflow.admin.common.pagination.Page<T>
      * @throws
      * @Title: query
-     * @Description: (这里用一句话描述这个方法的作用)
-     * @date 2018/3/14 16:56
      */
     @Override
     public Page<T> query(@Validated @ModelAttribute RequestPage requestPage, @Validated @ModelAttribute T bean) {
@@ -82,7 +75,6 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
      * @throws
      * @Title:
      * @Description: 根据id查询一条记录
-     * @date 2018/3/14 15:18
      */
     @Override
     public T get(@PathVariable("id") P id) {
@@ -106,7 +98,6 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
      * @throws
      * @Title: create
      * @Description: 保存新增
-     * @date 2018/3/14 15:23
      */
     @Override
     public ResponseResult create(@RequestBody T bean) {
@@ -119,8 +110,6 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
      * @return ResponseResult
      * @throws
      * @Title: update
-     * @Description: (这里用一句话描述这个方法的作用)
-     * @date 2018/3/14 15:38
      */
     @Override
     public ResponseResult update(@RequestBody T bean) {
@@ -133,7 +122,6 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
      * @throws
      * @Title: delete
      * @Description: 删除
-     * @date 2018/3/14 15:39
      */
     @Override
     public ResponseResult delete(@PathVariable("id") P id) {

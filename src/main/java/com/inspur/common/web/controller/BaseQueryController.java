@@ -19,7 +19,6 @@ public interface BaseQueryController<T extends Serializable> {
      * @throws
      * @Title: query
      * @Description: 分页查询
-     * @date 2018/3/14 16:56
      */
     @RequestMapping(method = RequestMethod.GET)
     Page<T> query(@Validated @ModelAttribute RequestPage requestPage, @Validated @ModelAttribute T bean);
@@ -30,7 +29,6 @@ public interface BaseQueryController<T extends Serializable> {
      * @throws
      * @Title: queryCond
      * @Description: 查询
-     * @date 2018/3/14 16:56
      */
     @RequestMapping(value="list",method = RequestMethod.GET)
     List<T> queryCond(@Validated @ModelAttribute T bean);
