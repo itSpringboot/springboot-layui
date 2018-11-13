@@ -76,7 +76,7 @@
                     } else if(data.length > 1){
                         layer.msg('只能同时编辑一个');
                     } else {
-                        window.location.href = '/rssinsidesuper/edit/' + data.id;
+                        window.location.href = '/admin/jcy/rssinsidesuperedit?id=' + data.id;
                     }
                     break;
                 case 'delete':
@@ -85,7 +85,8 @@
                     } else if(data.length > 1){
                         layer.msg('只能同时删除一个');
                     } else {
-                        $.ajax({url:"/rssinsidesuper/delete",data:{"id":data.id},async:false});
+                        var returnmsg = $.ajax({url:"/rssinsidesuper/delete",data:{"id":data.id},async:false});
+                        console.log(returnmsg);
                         table.reload('rssinsidesuper_id');
                     }
                     break;
@@ -105,7 +106,7 @@
                     layer.close(index);
                 });
             } else if(layEvent === 'edit'){
-                window.location.href = '/rssinsidesuper/edit/' + data.id;
+                window.location.href = '/admin/jcy/rssinsidesuperedit?id=' + data.id;
             }
         });
     });

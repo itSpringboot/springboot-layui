@@ -19,7 +19,7 @@
 /out
 /log
 .mvn
-
+vim.*
 ### NetBeans ###
 /nbproject/private/
 /build/

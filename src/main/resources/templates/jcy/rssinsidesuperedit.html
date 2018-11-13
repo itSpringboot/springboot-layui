@@ -1,7 +1,6 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8">
     <title>rssinsidesuper列表</title>
@@ -18,54 +17,49 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane1" action="/rssinsidesuper/save" method="post" name="f" lay-filter="first">
-        <input type="hidden" name="id" th:value="${data?.id}">
-        <div class="layui-form-item">
-            <label class="layui-form-label">监督报告表</label>
-            <div class="layui-input-inline">
-                <input type="text" name="presentId" th:value="${data?.presentId}" required placeholder="请输入监督报告表" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+<form class="layui-form layui-form-pane1"  method="post" id="rssinsidesuperForm" name="f" lay-filter="first">
+        <input type="hidden" name="id">
+        <input type="hidden" name="presentId">
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-inline">
-                <input type="text" name="insideName" th:value="${data?.insideName}" required placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="insideName" required placeholder="请输入姓名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">职务</label>
             <div class="layui-input-inline">
-                <input type="text" name="insidePost" th:value="${data?.insidePost}" required placeholder="请输入职务" autocomplete="off" class="layui-input">
+                <input type="text" name="insidePost" required placeholder="请输入职务" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">监督记录</label>
             <div class="layui-input-inline">
-                <input type="text" name="superRecord" th:value="${data?.superRecord}" required placeholder="请输入监督记录" autocomplete="off" class="layui-input">
+                <input type="text" name="superRecord" required placeholder="请输入监督记录" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">创建人</label>
             <div class="layui-input-inline">
-                <input type="text" name="crtUser" th:value="${data?.crtUser}" required placeholder="请输入创建人" autocomplete="off" class="layui-input">
+                <input type="text" name="crtUser" required placeholder="请输入创建人" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="crtTime" th:value="${data?.crtTime}" required placeholder="请输入创建时间" autocomplete="off" class="layui-input">
+                <input type="text" name="crtTime" required placeholder="请输入创建时间" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">修改人</label>
             <div class="layui-input-inline">
-                <input type="text" name="updUser" th:value="${data?.updUser}" required placeholder="请输入修改人" autocomplete="off" class="layui-input">
+                <input type="text" name="updUser" required placeholder="请输入修改人" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">修改时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="updTime" th:value="${data?.updTime}" required placeholder="请输入修改时间" autocomplete="off" class="layui-input">
+                <input type="text" name="updTime" required placeholder="请输入修改时间" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -93,7 +87,25 @@
                 }
             }
         });
-
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+        $.ajax({
+            url: "/rssinsidesuper/get",
+            data: {"id":getQueryVariable("id")},
+            async:false,
+            success: function(data){
+                console.log(data);
+                form.val('first', data);
+            }
+        });
         //初始赋值
         form.val('first', {});
 
@@ -114,12 +126,44 @@
         //监听提交
         form.on('submit(*)', function(data){
             layer.confirm('是否提交', {icon: 1, title:'提示'}, function(index){
-                document.f.submit();
-                layer.close(index);
-                return true;
+                var formData = $('#rssinsidesuperForm').serializeObject();
+                $.ajax({
+                    type:"post",
+                    url: "/rssinsidesuper/save",
+                    async:false,
+                    data:formData,
+                    success:function(data){
+                        if(data.success==true){
+                            window.location.href = '/admin/jcy/rssinsidesuper';
+                        }else{
+                            layer.msg("保存出错");
+                            return false;
+                        }
+
+                    },error:function(e,ee,eee){
+                        console.log(eee);
+                    }
+                });
             });
             return false;
         });
+
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
 
     });
 
