@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>rssinsidesuper列表</title>
+    <title>tuser列表</title>
     <link rel="icon" href="data:;base64,=">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,49 +17,42 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane1"  method="post" id="rssinsidesuperForm" name="f" lay-filter="first">
+<form class="layui-form layui-form-pane1" action="/tuser/save" method="post" id="tuserForm" name="tuser" lay-filter="first">
         <input type="hidden" name="id">
-        <input type="hidden" name="presentId">
         <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
-                <input type="text" name="insideName" required placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="name" required placeholder="请输入用户名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">职务</label>
+            <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
-                <input type="text" name="insidePost" required placeholder="请输入职务" autocomplete="off" class="layui-input">
+                <input type="text" name="pass" required placeholder="请输入密码" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">监督记录</label>
+            <label class="layui-form-label">手机号</label>
             <div class="layui-input-inline">
-                <input type="text" name="superRecord" required placeholder="请输入监督记录" autocomplete="off" class="layui-input">
+                <input type="text" name="phone" required placeholder="请输入手机号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">创建人</label>
+            <label class="layui-form-label">用户状态</label>
             <div class="layui-input-inline">
-                <input type="text" name="crtUser" required placeholder="请输入创建人" autocomplete="off" class="layui-input">
+                <input type="text" name="status" required placeholder="请输入用户状态" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="crtTime" required placeholder="请输入创建时间" autocomplete="off" class="layui-input">
+                <input type="text" name="created" required placeholder="请输入创建时间" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">修改人</label>
+            <label class="layui-form-label">更新时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="updUser" required placeholder="请输入修改人" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">修改时间</label>
-            <div class="layui-input-inline">
-                <input type="text" name="updTime" required placeholder="请输入修改时间" autocomplete="off" class="layui-input">
+                <input type="text" name="updated" required placeholder="请输入更新时间" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -75,6 +68,7 @@
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script src="/static/layui/src/layui.js"></script>
 <script src="/static/js/util.js"></script>
+
 <script>
     layui.use('form', function(){
         var form = layui.form;
@@ -87,13 +81,11 @@
                 }
             }
         });
-
         $.ajax({
-            url: "/rssinsidesuper/get",
+            url: "/tuser/get",
             data: {"id":getQueryVariable("id")},
             async:false,
             success: function(data){
-                console.log(data);
                 form.val('first', data);
             }
         });
@@ -117,15 +109,15 @@
         //监听提交
         form.on('submit(*)', function(data){
             layer.confirm('是否提交', {icon: 1, title:'提示'}, function(index){
-                var formData = $('#rssinsidesuperForm').serializeObject();
+                var formData = $('#tuserForm').serializeObject();
                 $.ajax({
                     type:"post",
-                    url: "/rssinsidesuper/save",
+                    url: "/tuser/save",
                     async:false,
                     data:formData,
                     success:function(data){
                         if(data.success==true){
-                            window.location.href = '/admin/jcy/rssinsidesuper';
+                            window.location.href = '/admin/jcy/tuser';
                         }else{
                             layer.msg("保存出错");
                             return false;
