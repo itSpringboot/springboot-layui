@@ -1,10 +1,10 @@
 package com.inspur.controller;
 
-import com.inspur.common.web.controller.BaseControllerImpl;
 import com.inspur.common.web.model.Page;
 import com.inspur.common.web.model.RequestPage;
 import com.inspur.common.web.model.ResponseResult;
 import com.inspur.common.web.service.AbstractService;
+import com.inspur.common.web.controller.BaseControllerImpl;
 import com.inspur.data.RssInsideSuper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-
 /**
  * RssInsideSuperController
  */
 @Controller
 @RequestMapping(value = "/rssinsidesuper")
-public class RssInsideSuperController extends BaseControllerImpl<RssInsideSuper, String> {
+public class RssInsideSuperController extends BaseControllerImpl<RssInsideSuper, java.lang.String>{
 
 	public RssInsideSuperController(@Qualifier("rssInsideSuperService") AbstractService service) {
 		super(service);

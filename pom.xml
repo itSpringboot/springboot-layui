@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
+	<groupId>com.inspur</groupId>
 	<artifactId>springboot-layui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>springboot-layui</name>
-	<description>Demo project for Spring Boot</description>
+	<description>springboot-layui project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+		<!--<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>-->
 	</properties>
 
 	<dependencies>
@@ -49,42 +49,24 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.7</version>
 		</dependency>
-		<!-- spring cloud -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-dependencies</artifactId>
-			<version>${spring-cloud.version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
 		<!--mysql 驱动包-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.12</version>
 		</dependency>
-		<!--uuid 随机数-->
+		<!--shiro添加ehcache缓存 !项目暂时没有使用shiro-->
 		<dependency>
-			<groupId>org.safehaus.jug</groupId>
-			<artifactId>jug</artifactId>
-			<version>2.0.0</version>
-			<classifier>lgpl</classifier>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.4.0</version>
 		</dependency>
-
 		<!-- spring boot 整合shiro依赖 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>1.4.0</version>
 		</dependency>
-		<!--shiro添加ehcache缓存 -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-ehcache</artifactId>
-			<version>1.4.0</version>
-		</dependency>
-
-
 		<!-- fastjson阿里巴巴jSON处理器 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -132,6 +114,11 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.2.2</version>
+		</dependency>
+		<!-- jsp支持 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -198,36 +185,11 @@
 			<artifactId>jackson-module-parameter-names</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
 			<version>RELEASE</version>
 		</dependency>
 	</dependencies>
-	<!-- 配置私服使用信息 -->
-	<repositories>
-		<repository>
-			<id>nexus-jar</id>
-			<name>Team Nexus jar Repository</name>
-			<url>http://10.110.13.14:8081/nexus/content/groups/inspur-loushang/</url>
-		</repository>
-		<repository>
-			<id>maven-public</id>
-			<name>My maven public</name>
-			<url>http://10.110.1.49:8888/repository/maven-public/</url>
-		</repository>
-
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus-plugin</id>
-			<name>Team Nexus plugin Repository</name>
-			<url>http://10.110.13.14:8081/nexus/content/groups/inspur-loushang/</url>
-		</pluginRepository>
-	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
