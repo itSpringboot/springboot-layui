@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="icon" href="data:;base64,=">
 	<title>tuser</title>
-	<link rel="stylesheet" href="/static/layui/src/css/layui.css">
+	<link rel="stylesheet" href="/layui/src/css/layui.css">
 </head>
 <body>
 <!-- 内容主体区域 -->
@@ -15,8 +15,8 @@
 	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-<script type="text/javascript" src="/static/js/jquery.min.js"></script>
-<script src="/static/layui/src/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/layui/src/layui.js"></script>
 <script>
     //JavaScript代码区域
     layui.config({
@@ -41,7 +41,7 @@
         table.render({
             id: 'tuser_id',
             elem: '#tuser'
-            ,url: '/tuser/query' //数据接口
+            ,url: '/tuser' //数据接口
             ,title: 'tuser'
             ,page: {prev: '上一页',next: '下一页',theme: '#1E9FFF'} //开启分页
             ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
@@ -83,8 +83,7 @@
                     } else if(data.length > 1){
                         layer.msg('只能同时删除一个');
                     } else {
-                        var returnmsg =  $.ajax({url:"/tuser/delete",data:{"id":data[0].id},async:false});
-                        console.log(returnmsg);
+                        $.ajax({type:"delete",url:"/tuser/" + data[0].id,async:false});
                         table.reload('tuser_id');
                     }
                     break;
@@ -99,8 +98,7 @@
                 layer.msg('查看操作');
             } else if(layEvent === 'del'){
                 layer.confirm('真的删除么', function(index){
-                    var returnmsg =   $.ajax({url:'/tuser/delete',data:{"id":data.id},async:false});
-                    console.log(returnmsg);
+                    $.ajax({type:"delete",url:"/tuser/" + data.id,async:false});
                     table.reload('tuser_id');
                     layer.close(index);
                 });

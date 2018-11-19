@@ -13,4 +13,8 @@
     <result column="created" jdbcType="VARCHAR" property="created" />
     <result column="updated" jdbcType="VARCHAR" property="updated" />
   </resultMap>
+
+  <select id="queryByname" parameterType="string" resultMap="BaseResultMap">
+  SELECT * from t_user where name = #{name}
+</select>
 </mapper>

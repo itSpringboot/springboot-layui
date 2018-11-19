@@ -101,6 +101,7 @@ public abstract class BaseControllerImpl<T extends Serializable, P extends Seria
      */
     @Override
     public ResponseResult create(@RequestBody T bean) {
+
         return ResponseResult.create(service.add(bean));
     }
 
