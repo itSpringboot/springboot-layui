@@ -145,27 +145,8 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!--inspur-common-->
-		<dependency>
-			<groupId>com.inspur</groupId>
-			<artifactId>inspur-common</artifactId>
-			<version>1.0</version>
-		</dependency>
 	</dependencies>
-	<!-- 配置私服使用信息 -->
-	<repositories>
-		<repository>
-			<id>nexus-jar</id>
-			<name>Team Nexus jar Repository</name>
-			<url>http://10.110.13.14:8081/nexus/content/groups/inspur-loushang/</url>
-		</repository>
-		<repository>
-			<id>maven-public</id>
-			<name>My maven public</name>
-			<url>http://10.110.1.49:8888/repository/maven-public/</url>
-		</repository>
 
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
